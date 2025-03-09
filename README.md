@@ -43,37 +43,40 @@ Plot the performance plot
 Evaluate the model with the testing data.
 
 ## PROGRAM
-### Name: Gokularamanan K
-### Register Number: 212222230040
-```python
+```
+# Name: Gokularamanan K
+# Reg No:212222230040
 class NeuralNet(nn.Module):
-  def __init__(self):
+    def __init__(self):
         super().__init__()
-        self.fc1 = nn.Linear(1, 5)
-        self.fc2 = nn.Linear(5, 10)
-        self.fc3 = nn.Linear(10, 1)
+        self.fc1 = nn.Linear(1, 10)
+        self.fc2 = nn.Linear(10, 1)
         self.relu = nn.ReLU()
-        self.history = {'loss': []}
 
-  def forward(self, x):
+    def forward(self, x):
         x = self.relu(self.fc1(x))
-        x = self.relu(self.fc2(x))
-        x = self.fc3(x)
+        x = self.fc2(x)
         return x
 
 
+```
+```
 
 # Initialize the Model, Loss Function, and Optimizer
 ai_brain = NeuralNet()
 criterion = nn.MSELoss()
-optimizer = optim.Adam(ai_brain.parameters(), lr=0.001)
+optimizer = optim.Adam(ai_brain.parameters(), lr=0.01)
+ai_brain.history = {'loss': []}
 
+```
 
+```
 
-def train_model(ai_brain, X_train, y_train, criterion, optimizer, epochs=2000):
+def train_model(ai_brain, X_train, y_train, criterion, optimizer, epochs=1000):
     for epoch in range(epochs):
         optimizer.zero_grad()
-        loss = criterion(ai_brain(X_train), y_train)
+        outputs = ai_brain(X_train)
+        loss = criterion(outputs, y_train)
         loss.backward()
         optimizer.step()
 
@@ -86,19 +89,22 @@ def train_model(ai_brain, X_train, y_train, criterion, optimizer, epochs=2000):
 ```
 ## Dataset Information
 
-![image](https://github.com/user-attachments/assets/b81c2844-f926-4fc1-b38a-5d02233d81d7)
+![Screenshot 2025-03-09 120230](https://github.com/user-attachments/assets/4f666bfc-0cb6-48f4-997c-5a532c142fcd)
+
 
 
 ## OUTPUT
 
 ### Training Loss Vs Iteration Plot
 
-![Screenshot 2025-02-27 143910](https://github.com/user-attachments/assets/337adeee-d337-4df2-8004-9d964de56664)
+![Screenshot 2025-03-09 115844](https://github.com/user-attachments/assets/4e289032-dfd7-4f3e-9ec8-1cd89016d7f6)
+
 
 
 ### New Sample Data Prediction
 
-![image](https://github.com/user-attachments/assets/fa26358e-38ed-4322-8a17-b77294314588)
+![Screenshot 2025-03-09 115947](https://github.com/user-attachments/assets/571b1c92-4783-4930-8b7b-f670d64e767e)
+
 
 
 ## RESULT
